@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { PAGE_TYPE_IDS } from "./roles";
 
 /**
  * Schema for the YAML frontmatter of each section file in content/sections/*.mdx.
@@ -16,6 +17,12 @@ export const sectionFrontmatterSchema = z.object({
   tags: z.array(z.string()).default([]),
   copyPrompt: z.string().min(1, "copyPrompt is required"),
   order: z.number().optional(),
+  /** Page types this section is a good fit for (used by the Nica Generator). */
+  pageTypes: z
+    .array(z.enum(PAGE_TYPE_IDS as [string, ...string[]]))
+    .default([]),
+  /** Optional bias for random selection in the generator (default 1). */
+  weight: z.number().positive().optional(),
 });
 
 export type SectionFrontmatter = z.infer<typeof sectionFrontmatterSchema>;

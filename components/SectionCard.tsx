@@ -1,14 +1,15 @@
 import Link from "next/link";
 import type { Section } from "@/lib/schema";
+import { Badge } from "@/components/ui/badge";
 import PreviewFrame from "./PreviewFrame";
 
 export default function SectionCard({ section }: { section: Section }) {
   return (
     <Link
       href={`/sections/${section.slug}`}
-      className="group block overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+      className="group block overflow-hidden rounded-xl border border-border bg-card shadow-sm transition hover:-translate-y-0.5 hover:border-foreground/20 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
-      <div className="h-56 overflow-hidden border-b border-gray-100 bg-gray-50">
+      <div className="h-56 overflow-hidden border-b border-border bg-white">
         <PreviewFrame
           html={section.html}
           title={`${section.title} preview`}
@@ -18,22 +19,24 @@ export default function SectionCard({ section }: { section: Section }) {
       </div>
       <div className="p-4">
         <div className="flex items-center justify-between gap-2">
-          <h3 className="font-semibold text-gray-900 group-hover:text-indigo-600">
+          <h3 className="font-semibold text-foreground group-hover:text-primary">
             {section.title}
           </h3>
-          <span className="shrink-0 rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+          <Badge variant="secondary" className="shrink-0">
             {section.category}
-          </span>
+          </Badge>
         </div>
         {section.description && (
-          <p className="mt-1 line-clamp-2 text-sm text-gray-500">{section.description}</p>
+          <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+            {section.description}
+          </p>
         )}
         {section.tags.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1.5">
             {section.tags.slice(0, 4).map((t) => (
-              <span key={t} className="rounded bg-indigo-50 px-2 py-0.5 text-xs text-indigo-600">
+              <Badge key={t} variant="outline" className="text-xs font-normal">
                 {t}
-              </span>
+              </Badge>
             ))}
           </div>
         )}

@@ -10,8 +10,8 @@ export default function CategoryFilter({ categories, selected, onSelect }: Props
   const chip = (active: boolean) =>
     `rounded-full px-4 py-1.5 text-sm font-medium transition ${
       active
-        ? "bg-gray-900 text-white"
-        : "bg-white text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        ? "bg-primary text-primary-foreground"
+        : "bg-secondary text-secondary-foreground hover:bg-secondary/70"
     }`;
 
   return (

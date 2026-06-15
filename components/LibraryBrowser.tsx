@@ -27,7 +27,7 @@ export default function LibraryBrowser({ sections, categories }: Props) {
       <CategoryFilter categories={categories} selected={category} onSelect={setCategory} />
 
       {results.length === 0 ? (
-        <p className="py-16 text-center text-gray-500">
+        <p className="py-16 text-center text-muted-foreground">
           No sections match your search. Try a different term or category.
         </p>
       ) : (
