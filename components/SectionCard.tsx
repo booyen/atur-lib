@@ -42,7 +42,7 @@ export default function SectionCard({ section }: { section: Section }) {
 
   return (
     <Dialog>
-      <DialogTrigger className="group relative block aspect-video w-full overflow-hidden rounded-xl border border-border bg-white text-left shadow-sm transition hover:border-foreground/20 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+      <DialogTrigger className="group relative block aspect-video w-full overflow-hidden rounded-xl bg-white text-left shadow-sm transition hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
         <PreviewFrame
           html={section.html}
           title={`${section.title} preview`}
