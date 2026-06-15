@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { CheckCircledIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import type { Section } from "@/lib/schema";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -28,16 +28,16 @@ export default function SectionCard({ section }: { section: Section }) {
           </Badge>
         </div>
 
-        {/* Hover detail bar — frosted glass, slides up on hover */}
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-2 items-center justify-between gap-3 border-t border-white/10 bg-gradient-to-t from-black/60 to-black/10 p-3 opacity-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md transition duration-200 group-hover:translate-y-0 group-hover:opacity-100">
-          <div className="flex min-w-0 items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-white">
+        {/* Hover detail bar — floating frosted bar, inset from edges */}
+        <div className="pointer-events-none absolute inset-x-3 bottom-3 flex translate-y-2 items-center justify-between gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-2.5 opacity-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md transition duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+          <div className="flex min-w-0 items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-white">
             <span className="truncate">{section.title}</span>
-            {section.tags[0] && (
-              <span className="shrink-0 text-white/50">| {section.tags[0]}</span>
-            )}
+            <span className="h-3 w-px shrink-0 bg-white/30" />
+            <span className="shrink-0 text-white/60">{section.category}</span>
           </div>
-          <span className="flex shrink-0 items-center gap-1 text-xs font-semibold uppercase tracking-wider text-white">
-            View <ArrowRightIcon className="size-3.5" />
+          <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white">
+            <CheckCircledIcon className="size-4 text-white/70" />
+            See live <ChevronRightIcon className="size-4" />
           </span>
         </div>
       </DialogTrigger>
