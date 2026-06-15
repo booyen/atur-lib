@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Section } from "@/lib/schema";
+import { sectionPrompt } from "@/lib/prompts";
 import PreviewFrame from "./PreviewFrame";
 import CopyButton from "./CopyButton";
 
@@ -40,7 +41,7 @@ export default function SectionDetail({ section }: { section: Section }) {
         </div>
         <div className="flex gap-3">
           <CopyButton value={section.html} label="Copy code" />
-          <CopyButton value={section.copyPrompt} label="Copy prompt" variant="secondary" />
+          <CopyButton value={sectionPrompt(section)} label="Copy prompt" variant="secondary" />
         </div>
       </div>
 
@@ -59,8 +60,8 @@ export default function SectionDetail({ section }: { section: Section }) {
         <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
           AI Prompt
         </h2>
-        <p className="rounded-lg border border-border bg-card p-4 text-sm text-foreground/80">
-          {section.copyPrompt}
+        <p className="whitespace-pre-line rounded-lg border border-border bg-card p-4 text-sm text-foreground/80">
+          {sectionPrompt(section)}
         </p>
       </section>
 

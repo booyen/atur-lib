@@ -1,6 +1,7 @@
 import type { Section } from "./schema";
 import type { PageTypeId, RoleId } from "./roles";
 import { getTemplate } from "./pageTemplates";
+import { DESIGN_SYSTEM_DIRECTIVE } from "./prompts";
 
 /** One slot of a generated page: a role plus the section chosen for it (or null = no content yet). */
 export type GeneratedSlot = {
@@ -126,13 +127,13 @@ export function pageHtml(slots: GeneratedSlot[]): string {
     .join("\n\n");
 }
 
-/** A combined AI prompt to recreate the whole page from its sections' prompts. */
+/** A combined, framework-agnostic AI prompt to recreate the whole page. */
 export function pagePrompt(pageType: PageTypeId, slots: GeneratedSlot[]): string {
-  const intro = `Build a complete ${pageType} landing page using HTML and Tailwind CSS, composed of the following sections in order. Keep a cohesive visual style across all sections.`;
+  const intro = `Build a complete ${pageType} landing page composed of the following sections in order, with a cohesive visual style across all of them.`;
   const parts = slots.map((s, i) => {
     const n = i + 1;
     if (s.section) return `${n}. ${s.role} — ${s.section.copyPrompt}`;
     return `${n}. ${s.role} — design an appropriate ${s.role.toLowerCase()} section for a ${pageType} page.`;
   });
-  return [intro, "", ...parts].join("\n");
+  return [intro, "", ...parts, "", DESIGN_SYSTEM_DIRECTIVE].join("\n");
 }
