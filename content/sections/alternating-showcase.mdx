@@ -1,0 +1,45 @@
+---
+title: Alternating Showcase
+slug: alternating-showcase
+description: A zig-zag product showcase with image and copy alternating sides per row.
+category: Product Showcase
+pageTypes: [saas, product]
+tags: [showcase, zig-zag, alternating, product]
+order: 1
+copyPrompt: >-
+  A product showcase with alternating rows (zig-zag): each row pairs an image on
+  one side with a heading, a short paragraph, and a small feature list on the
+  other, alternating which side the image is on per row. Rows stack vertically on
+  mobile.
+---
+
+<section class="bg-white py-20">
+  <div class="mx-auto max-w-6xl space-y-16 px-6">
+    <div class="grid items-center gap-10 md:grid-cols-2">
+      <img src="https://picsum.photos/seed/showcase-1/800/600" alt="Editor preview" class="w-full rounded-2xl object-cover shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12)]" />
+      <div>
+        <h3 class="text-2xl font-bold tracking-tight text-gray-900">Edit in context, ship with confidence</h3>
+        <p class="mt-3 max-w-[55ch] text-sm leading-relaxed text-gray-600">Tune any section against a live preview and copy the exact markup you see.</p>
+        <ul class="mt-5 space-y-2 text-sm text-gray-700">
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span> Live sandboxed rendering</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span> Viewport width presets</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span> One-click copy</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid items-center gap-10 md:grid-cols-2">
+      <div class="md:order-2">
+        <img src="https://picsum.photos/seed/showcase-2/800/600" alt="Generator preview" class="w-full rounded-2xl object-cover shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12)]" />
+      </div>
+      <div class="md:order-1">
+        <h3 class="text-2xl font-bold tracking-tight text-gray-900">Generate whole pages, not just parts</h3>
+        <p class="mt-3 max-w-[55ch] text-sm leading-relaxed text-gray-600">Pick a page type and assemble a full layout from sections that fit it best.</p>
+        <ul class="mt-5 space-y-2 text-sm text-gray-700">
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span> Page-type templates</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span> Shuffle any slot</li>
+          <li class="flex items-center gap-2"><span class="h-1.5 w-1.5 rounded-full bg-emerald-600"></span> Shareable links</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

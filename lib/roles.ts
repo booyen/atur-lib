@@ -43,7 +43,7 @@ export const ROLES = [
   { id: "Hero", built: true },
   { id: "Logo Cloud", built: false },
   { id: "Features", built: true },
-  { id: "Product Showcase", built: false },
+  { id: "Product Showcase", built: true },
   { id: "How It Works", built: false },
   { id: "Stats", built: false },
   { id: "Pricing", built: true },
