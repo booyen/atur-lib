@@ -1,0 +1,36 @@
+---
+title: FAQ List
+slug: faq-accordion
+description: A two-column FAQ layout with questions and answers.
+category: FAQ
+tags: [faq, questions, support]
+order: 1
+copyPrompt: >-
+  Create an FAQ section using HTML and Tailwind CSS. Show a heading on the left
+  and a list of frequently asked questions with their answers on the right, in a
+  two-column layout that stacks on mobile. Each item has a bold question and a
+  muted answer paragraph, separated by dividers.
+---
+
+<section class="bg-white py-20">
+  <div class="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-3">
+    <div class="lg:col-span-1">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900">Frequently asked questions</h2>
+      <p class="mt-3 text-gray-600">Can’t find what you’re looking for? Reach out to our team.</p>
+    </div>
+    <dl class="lg:col-span-2 divide-y divide-gray-200">
+      <div class="py-5">
+        <dt class="font-semibold text-gray-900">Do I need a license to use the sections?</dt>
+        <dd class="mt-2 text-sm text-gray-600">No. Copy any section and use it freely in personal or commercial projects.</dd>
+      </div>
+      <div class="py-5">
+        <dt class="font-semibold text-gray-900">What is the “Copy prompt” button?</dt>
+        <dd class="mt-2 text-sm text-gray-600">It copies a ready-made instruction you can paste into an AI tool to recreate or customize the section.</dd>
+      </div>
+      <div class="py-5">
+        <dt class="font-semibold text-gray-900">Which framework do the sections use?</dt>
+        <dd class="mt-2 text-sm text-gray-600">Plain HTML with Tailwind CSS utility classes, so they drop into almost any project.</dd>
+      </div>
+    </dl>
+  </div>
+</section>

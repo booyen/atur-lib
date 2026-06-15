@@ -1,0 +1,42 @@
+---
+title: Testimonial Cards
+slug: testimonial-cards
+description: A three-up grid of customer testimonials with avatars and names.
+category: Testimonials
+tags: [testimonials, social-proof, cards, quotes]
+order: 1
+copyPrompt: >-
+  Create a testimonials section using HTML and Tailwind CSS. Show a centered
+  heading followed by a responsive three-column grid of testimonial cards. Each
+  card has a short quote, and a footer with a circular avatar placeholder, the
+  person's name, and their role. Use subtle borders and shadows.
+---
+
+<section class="bg-gray-50 py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <h2 class="text-center text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Loved by builders</h2>
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      <figure class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <blockquote class="text-gray-700">“Atur saved us days of front-end work. We just copy, paste, and ship.”</blockquote>
+        <figcaption class="mt-6 flex items-center gap-3">
+          <span class="h-10 w-10 rounded-full bg-indigo-200"></span>
+          <span><span class="block text-sm font-semibold text-gray-900">Amir K.</span><span class="block text-xs text-gray-500">Founder, Lumen</span></span>
+        </figcaption>
+      </figure>
+      <figure class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <blockquote class="text-gray-700">“The copy-prompt feature is genius. My AI tool nails the section every time.”</blockquote>
+        <figcaption class="mt-6 flex items-center gap-3">
+          <span class="h-10 w-10 rounded-full bg-purple-200"></span>
+          <span><span class="block text-sm font-semibold text-gray-900">Sara L.</span><span class="block text-xs text-gray-500">Designer, Northwind</span></span>
+        </figcaption>
+      </figure>
+      <figure class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm">
+        <blockquote class="text-gray-700">“Clean code, sensible Tailwind, zero dependencies. Exactly what I wanted.”</blockquote>
+        <figcaption class="mt-6 flex items-center gap-3">
+          <span class="h-10 w-10 rounded-full bg-emerald-200"></span>
+          <span><span class="block text-sm font-semibold text-gray-900">Diego R.</span><span class="block text-xs text-gray-500">Engineer, Acme</span></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

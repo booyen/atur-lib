@@ -1,0 +1,58 @@
+---
+title: Three-Tier Pricing
+slug: three-tier-pricing
+description: A responsive three-column pricing table with a highlighted recommended plan.
+category: Pricing
+tags: [pricing, plans, cards, saas]
+order: 1
+copyPrompt: >-
+  Create a three-tier pricing section using HTML and Tailwind CSS. Show three
+  plan cards side by side on desktop and stacked on mobile. The middle plan
+  should be visually highlighted as "Most popular" with a colored border and
+  badge. Each card needs a plan name, monthly price, a short list of features
+  with checkmarks, and a call-to-action button. Keep it clean and modern.
+---
+
+<section class="bg-gray-50 py-20">
+  <div class="mx-auto max-w-6xl px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Simple, transparent pricing</h2>
+      <p class="mt-3 text-gray-600">Pick the plan that fits. Upgrade or cancel anytime.</p>
+    </div>
+    <div class="mt-12 grid gap-6 lg:grid-cols-3">
+      <div class="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+        <h3 class="text-lg font-semibold text-gray-900">Starter</h3>
+        <p class="mt-4"><span class="text-4xl font-bold text-gray-900">$9</span><span class="text-gray-500">/mo</span></p>
+        <ul class="mt-6 space-y-3 text-sm text-gray-600">
+          <li>✓ 1 project</li>
+          <li>✓ Basic analytics</li>
+          <li>✓ Community support</li>
+        </ul>
+        <a href="#" class="mt-8 block rounded-md border border-gray-300 px-4 py-2 text-center text-sm font-semibold text-gray-900 hover:bg-gray-50">Choose Starter</a>
+      </div>
+      <div class="rounded-2xl border-2 border-indigo-600 bg-white p-8 shadow-md">
+        <div class="flex items-center justify-between">
+          <h3 class="text-lg font-semibold text-gray-900">Pro</h3>
+          <span class="rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-600">Most popular</span>
+        </div>
+        <p class="mt-4"><span class="text-4xl font-bold text-gray-900">$29</span><span class="text-gray-500">/mo</span></p>
+        <ul class="mt-6 space-y-3 text-sm text-gray-600">
+          <li>✓ Unlimited projects</li>
+          <li>✓ Advanced analytics</li>
+          <li>✓ Priority support</li>
+        </ul>
+        <a href="#" class="mt-8 block rounded-md bg-indigo-600 px-4 py-2 text-center text-sm font-semibold text-white hover:bg-indigo-500">Choose Pro</a>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+        <h3 class="text-lg font-semibold text-gray-900">Enterprise</h3>
+        <p class="mt-4"><span class="text-4xl font-bold text-gray-900">$99</span><span class="text-gray-500">/mo</span></p>
+        <ul class="mt-6 space-y-3 text-sm text-gray-600">
+          <li>✓ SSO &amp; audit logs</li>
+          <li>✓ Dedicated manager</li>
+          <li>✓ 99.9% SLA</li>
+        </ul>
+        <a href="#" class="mt-8 block rounded-md border border-gray-300 px-4 py-2 text-center text-sm font-semibold text-gray-900 hover:bg-gray-50">Contact sales</a>
+      </div>
+    </div>
+  </div>
+</section>
