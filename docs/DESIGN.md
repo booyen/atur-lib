@@ -21,7 +21,8 @@ to Atur. When code and this document disagree, this document wins — fix the co
   are customized in `app/globals.css`.
 - **Icons:** `@radix-ui/react-icons` only. **No emojis anywhere** (code, markup,
   content, alt text). Standardize on the icon set's default weight.
-- **Fonts:** `Geist` / `Geist Mono`. `Inter` and serif UI fonts are banned.
+- **Fonts:** `Sora` for UI (display + body), `Geist Mono` for code/numbers.
+  `Inter` and serif UI fonts are banned.
 
 ## Color (one palette, one accent)
 
