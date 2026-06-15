@@ -1,20 +1,52 @@
 "use client";
 
-import { CheckCircledIcon, ChevronRightIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
+import { toast } from "sonner";
+import {
+  CheckCircledIcon,
+  ChevronRightIcon,
+  ChevronDownIcon,
+  SunIcon,
+  ReloadIcon,
+  Link2Icon,
+  BookmarkIcon,
+  BookmarkFilledIcon,
+  ExternalLinkIcon,
+  ClipboardCopyIcon,
+  Cross2Icon,
+} from "@radix-ui/react-icons";
 import type { Section } from "@/lib/schema";
+import { sectionPrompt } from "@/lib/prompts";
+import { copyToClipboard } from "@/lib/clipboard";
 import { Badge } from "@/components/ui/badge";
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogClose, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import PreviewFrame from "./PreviewFrame";
-import SectionDetail from "./SectionDetail";
 
 export default function SectionCard({ section }: { section: Section }) {
+  const [reloadKey, setReloadKey] = useState(0);
+  const [bookmarked, setBookmarked] = useState(false);
+  const [lightCanvas, setLightCanvas] = useState(false);
+  const href = `/sections/${section.slug}`;
+
+  async function copy(text: string, label: string) {
+    if (await copyToClipboard(text)) toast.success(label);
+    else toast.error("Copy failed — press Ctrl+C");
+  }
+
   return (
     <Dialog>
-      <DialogTrigger className="group relative block h-60 w-full overflow-hidden rounded-xl border border-border bg-white text-left shadow-sm transition hover:border-foreground/20 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+      <DialogTrigger className="group relative block h-72 w-full overflow-hidden rounded-xl border border-border bg-white text-left shadow-sm transition hover:border-foreground/20 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
         <PreviewFrame
           html={section.html}
           title={`${section.title} preview`}
-          height={240}
+          height={288}
           interactive={false}
         />
 
@@ -42,27 +74,130 @@ export default function SectionCard({ section }: { section: Section }) {
         </div>
       </DialogTrigger>
 
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-3xl">
-        <header className="space-y-2 pr-8">
-          <div className="flex flex-wrap items-center gap-3">
-            <DialogTitle className="text-xl font-bold tracking-tight">{section.title}</DialogTitle>
-            <Badge variant="secondary">{section.category}</Badge>
+      <DialogContent
+        showCloseButton={false}
+        className="inset-0 flex h-[100dvh] w-screen max-w-none translate-x-0 translate-y-0 flex-col gap-0 rounded-none border-0 bg-background p-0"
+      >
+        {/* Toolbar */}
+        <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <span className="inline-flex size-7 shrink-0 items-center justify-center rounded-md bg-emerald-600 text-xs font-bold text-white">
+              A
+            </span>
+            <DialogTitle className="truncate text-sm font-semibold">{section.title}</DialogTitle>
           </div>
-          {section.description && (
-            <p className="text-sm text-muted-foreground">{section.description}</p>
-          )}
-          {section.tags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
-              {section.tags.map((t) => (
-                <Badge key={t} variant="outline" className="font-normal">
-                  {t}
-                </Badge>
-              ))}
-            </div>
-          )}
-        </header>
 
-        <SectionDetail section={section} />
+          <div className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Toggle preview background"
+              onClick={() => setLightCanvas((v) => !v)}
+              className="hidden sm:inline-flex"
+            >
+              <SunIcon className="size-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Reload preview"
+              onClick={() => setReloadKey((k) => k + 1)}
+            >
+              <ReloadIcon className="size-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Copy link"
+              onClick={() =>
+                copy(`${window.location.origin}${href}`, "Link copied")
+              }
+              className="hidden sm:inline-flex"
+            >
+              <Link2Icon className="size-4" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Bookmark"
+              aria-pressed={bookmarked}
+              onClick={() => setBookmarked((v) => !v)}
+              className="hidden sm:inline-flex"
+            >
+              {bookmarked ? <BookmarkFilledIcon className="size-4" /> : <BookmarkIcon className="size-4" />}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              aria-label="Open in new tab"
+              render={<a href={href} target="_blank" rel="noreferrer" />}
+            >
+              <ExternalLinkIcon className="size-4" />
+            </Button>
+
+            <a
+              href={href}
+              className="ml-1 rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition hover:bg-accent hover:text-foreground"
+            >
+              Open
+            </a>
+
+            {/* Copy prompt split button */}
+            <div className="ml-1 flex">
+              <Button
+                onClick={() => copy(sectionPrompt(section), "Prompt copied")}
+                className="gap-2 rounded-r-none bg-emerald-600 text-white hover:bg-emerald-500"
+              >
+                <ClipboardCopyIcon className="size-4" /> Copy prompt
+              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  render={
+                    <Button
+                      aria-label="More copy options"
+                      className="rounded-l-none border-l border-emerald-700/60 bg-emerald-600 px-2 text-white hover:bg-emerald-500"
+                    />
+                  }
+                >
+                  <ChevronDownIcon className="size-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => copy(section.html, "Code copied")}>
+                    Copy code
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => copy(sectionPrompt(section), "Prompt copied")}>
+                    Copy prompt
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+
+            <DialogClose
+              render={<Button variant="ghost" size="icon" aria-label="Close" />}
+              className="ml-1"
+            >
+              <Cross2Icon className="size-4" />
+            </DialogClose>
+          </div>
+        </div>
+
+        {/* Preview canvas */}
+        <div
+          className={`relative flex-1 overflow-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+            lightCanvas ? "bg-white" : "bg-background"
+          }`}
+        >
+          <div className="mx-auto w-full max-w-5xl p-6">
+            <div className="overflow-hidden rounded-xl border border-border bg-white">
+              <PreviewFrame
+                key={reloadKey}
+                html={section.html}
+                title={`${section.title} full preview`}
+                autoResize
+              />
+            </div>
+          </div>
+        </div>
       </DialogContent>
     </Dialog>
   );

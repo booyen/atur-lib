@@ -65,7 +65,7 @@ export default function PreviewFrame({
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>html,body{margin:0;}</style>
+    <style>html,body{margin:0;}${autoResize ? "" : "html,body{overflow:hidden;}"}</style>
   </head>
   <body>${html}${resizeScript}</body>
 </html>`;
