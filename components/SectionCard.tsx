@@ -42,31 +42,19 @@ export default function SectionCard({ section }: { section: Section }) {
 
   return (
     <Dialog>
-      <DialogTrigger className="group relative block h-72 w-full overflow-hidden rounded-xl border border-border bg-white text-left shadow-sm transition hover:border-foreground/20 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
+      <DialogTrigger className="group relative block aspect-video w-full overflow-hidden rounded-xl border border-border bg-white text-left shadow-sm transition hover:border-foreground/20 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
         <PreviewFrame
           html={section.html}
           title={`${section.title} preview`}
-          height={288}
           interactive={false}
+          fill
         />
-
-        {/* Category pill — always visible, top-right */}
-        <div className="absolute right-2 top-2 z-10">
-          <Badge
-            variant="secondary"
-            className="border border-border/60 bg-secondary/85 backdrop-blur supports-[backdrop-filter]:bg-secondary/70"
-          >
-            {section.category}
-          </Badge>
-        </div>
 
         {/* Hover detail bar — floating frosted bar, inset from edges */}
         <div className="pointer-events-none absolute inset-x-3 bottom-3 flex translate-y-2 items-center justify-between gap-3 rounded-xl border border-white/10 bg-black/40 px-4 py-2.5 opacity-0 shadow-[inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-md transition duration-200 group-hover:translate-y-0 group-hover:opacity-100">
-          <div className="flex min-w-0 items-center gap-2.5 text-xs font-semibold uppercase tracking-wider text-white">
-            <span className="truncate">{section.title}</span>
-            <span className="h-3 w-px shrink-0 bg-white/30" />
-            <span className="shrink-0 text-white/60">{section.category}</span>
-          </div>
+          <span className="truncate text-xs font-semibold uppercase tracking-wider text-white">
+            {section.title}
+          </span>
           <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-white">
             <CheckCircledIcon className="size-4 text-white/70" />
             See live <ChevronRightIcon className="size-4" />
@@ -76,7 +64,7 @@ export default function SectionCard({ section }: { section: Section }) {
 
       <DialogContent
         showCloseButton={false}
-        className="inset-0 flex h-[100dvh] w-screen max-w-none translate-x-0 translate-y-0 flex-col gap-0 rounded-none border-0 bg-background p-0"
+        className="flex h-[85vh] w-[calc(100%-2rem)] max-w-6xl flex-col gap-0 overflow-hidden p-0 sm:max-w-6xl"
       >
         {/* Toolbar */}
         <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-border px-4">

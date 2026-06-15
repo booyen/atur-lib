@@ -58,7 +58,7 @@ export default function CategoryCarousel({
         className="flex snap-x gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {sections.map((s) => (
-          <div key={s.slug} className="w-[320px] shrink-0 snap-start">
+          <div key={s.slug} className="w-[300px] shrink-0 snap-start sm:w-[340px] lg:w-[360px]">
             <SectionCard section={s} />
           </div>
         ))}

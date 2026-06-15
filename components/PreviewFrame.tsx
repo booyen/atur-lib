@@ -18,6 +18,8 @@ type Props = {
   height?: number;
   /** Allow interaction (clicks/scroll). Off for thumbnails. */
   interactive?: boolean;
+  /** Fill the parent's height (e.g. an aspect-ratio card) instead of a fixed px height. */
+  fill?: boolean;
 };
 
 /**
@@ -31,6 +33,7 @@ export default function PreviewFrame({
   autoResize = false,
   height = 288,
   interactive = true,
+  fill = false,
 }: Props) {
   const ref = useRef<HTMLIFrameElement>(null);
   const [measured, setMeasured] = useState<number | null>(null);
@@ -78,9 +81,9 @@ export default function PreviewFrame({
       sandbox="allow-scripts"
       loading="lazy"
       tabIndex={interactive ? 0 : -1}
-      className="w-full border-0 bg-white"
+      className={`w-full border-0 bg-white ${fill ? "h-full" : ""}`}
       style={{
-        height: autoResize ? (measured ?? height) : height,
+        height: fill ? "100%" : autoResize ? (measured ?? height) : height,
         pointerEvents: interactive ? "auto" : "none",
       }}
     />
