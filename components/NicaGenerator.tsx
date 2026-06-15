@@ -21,6 +21,7 @@ import PreviewFrame from "./PreviewFrame";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ReloadIcon, ShuffleIcon, CubeIcon } from "@radix-ui/react-icons";
 
 const DEFAULT_TYPE: PageTypeId = PAGE_TYPES[0].id;
 
@@ -97,7 +98,9 @@ export default function NicaGenerator({ sections }: { sections: Section[] }) {
         </Tabs>
 
         <div className="flex flex-wrap gap-2">
-          <Button onClick={regenerate}>↻ Regenerate</Button>
+          <Button onClick={regenerate}>
+            <ReloadIcon className="size-4" /> Regenerate
+          </Button>
           <Button
             variant="secondary"
             onClick={() => copy(pageHtml(slots), "Page code copied")}
@@ -131,14 +134,21 @@ export default function NicaGenerator({ sections }: { sections: Section[] }) {
 
       {/* Assembled page */}
       <div className="space-y-4">
-        {slots.map((slot, i) => (
-          <SlotBlock
-            key={`${slot.role}-${i}`}
-            slot={slot}
-            canShuffle={candidateCounts[i] > 1}
-            onShuffle={() => shuffle(i)}
-          />
-        ))}
+        {slots.length === 0
+          ? Array.from({ length: 4 }).map((_, i) => (
+              <div
+                key={i}
+                className="h-48 animate-pulse rounded-xl border border-border bg-card"
+              />
+            ))
+          : slots.map((slot, i) => (
+              <SlotBlock
+                key={`${slot.role}-${i}`}
+                slot={slot}
+                canShuffle={candidateCounts[i] > 1}
+                onShuffle={() => shuffle(i)}
+              />
+            ))}
       </div>
     </div>
   );
@@ -165,7 +175,7 @@ function SlotBlock({
         </div>
         {slot.section && canShuffle && (
           <Button size="sm" variant="ghost" onClick={onShuffle}>
-            ⇄ Shuffle
+            <ShuffleIcon className="size-4" /> Shuffle
           </Button>
         )}
       </div>
@@ -179,8 +189,8 @@ function SlotBlock({
           />
         </div>
       ) : (
-        <div className="flex flex-col items-center justify-center gap-1 py-12 text-center">
-          <span className="text-2xl">📦</span>
+        <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+          <CubeIcon className="size-6 text-muted-foreground" />
           <p className="text-sm font-medium text-foreground">{slot.role}</p>
           <p className="text-xs text-muted-foreground">No section yet — coming soon</p>
         </div>
