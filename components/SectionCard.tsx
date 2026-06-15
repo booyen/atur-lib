@@ -13,10 +13,12 @@ import {
   BookmarkFilledIcon,
   ExternalLinkIcon,
   ClipboardCopyIcon,
+  FrameIcon,
   Cross2Icon,
 } from "@radix-ui/react-icons";
 import type { Section } from "@/lib/schema";
 import { sectionPrompt } from "@/lib/prompts";
+import { embedUrl } from "@/lib/figma";
 import { copyToClipboard } from "@/lib/clipboard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -151,10 +153,20 @@ export default function SectionCard({ section }: { section: Section }) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={() => copy(section.html, "Code copied")}>
-                    Copy code
+                    <ClipboardCopyIcon className="size-4" /> Copy code
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => copy(sectionPrompt(section), "Prompt copied")}>
-                    Copy prompt
+                    <ClipboardCopyIcon className="size-4" /> Copy prompt
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() =>
+                      copy(
+                        embedUrl(window.location.origin, section.slug),
+                        "Figma URL copied — in Figma, open the html.to.design plugin → Import from URL → paste",
+                      )
+                    }
+                  >
+                    <FrameIcon className="size-4" /> Copy for Figma
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
